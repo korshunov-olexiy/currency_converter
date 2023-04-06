@@ -1,0 +1,22 @@
+body {
+    margin: 10px;
+    max-width: 600px;
+    min-width: 320px;
+  }
+  
+  #select-currency::-ms-expand {
+    display: none;
+  }
+
+  #select-currency {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 25px;
+    /* background: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-16.png") no-repeat scroll right center transparent; */
+    background: url("../images/arrow-down-16.webp") no-repeat scroll right center transparent;
+  }
+
+  .fa-dot-circle-o {
+    color:green;
+}

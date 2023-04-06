@@ -1,0 +1,38 @@
+{
+    "manifest_version": 3,
+    "name": "Currency conversion",
+    "version": "1.0",
+    "description": "Convert currency to UAH",
+    "icons": {
+      "128": "images/icon.png"
+    },
+    "host_permissions": ["https://bank.gov.ua/*"],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "web_accessible_resources": [
+      {
+        "resources": ["js/*"],
+        "matches": ["https://*/*", "http://*/*"]
+      },
+      {
+        "resources": ["images/*"],
+        "matches": ["https://*/*", "http://*/*"]
+      },
+      {
+        "resources": ["css/*"],
+        "matches": ["https://*/*", "http://*/*"]
+      }
+    ],
+    "permissions": ["storage"],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["js/content.js"]
+      }
+    ]
+  }
+  

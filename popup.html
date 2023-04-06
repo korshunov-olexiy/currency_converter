@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="css/select2.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery-3.6.4.min.js"></script>
+  <script src="js/select2.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="select-currency" class="form-control form-control-sm">Выберите валюту:</label>
+      <select id="select-currency" class="form-control form-control-sm">
+        <!-- Сюда вставим пункты выпадающего меню -->
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="amount" class="form-control form-control-sm">Введите сумму для конвертации</label>
+      <input id="amount" type="text" class="form-control form-control-sm" placeholder="Сумма для конвертации">
+    </div>
+  </div>
+  <button id="convert-btn" type="submit" class="btn btn-primary form-control">Конвертировать</button>
+  <div class="md-6">
+    <label for="result-lbl" class="md-6">Результат ковертации:</label>
+    <label id="result-lbl" class="md-6"></label>
+  </div>
+
+<script src="js/popup.js"></script>
+</body>
+</html>
