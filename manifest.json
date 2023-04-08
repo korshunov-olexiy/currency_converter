@@ -6,6 +6,9 @@
     "icons": {
       "128": "images/icon.png"
     },
+    "background": {
+      "service_worker": "background.js"
+    },
     "host_permissions": ["https://bank.gov.ua/*"],
     "action": {
       "default_popup": "popup.html"
@@ -24,7 +27,7 @@
         "matches": ["https://*/*", "http://*/*"]
       }
     ],
-    "permissions": ["storage"],
+    "permissions": ["storage", "activeTab", "scripting"],
     "content_security_policy": {
       "extension_pages": "script-src 'self'; object-src 'self'"
     },
@@ -35,4 +38,3 @@
       }
     ]
   }
-  
