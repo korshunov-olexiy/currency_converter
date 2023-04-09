@@ -16,3 +16,7 @@ body {
     /* background: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-16.png") no-repeat scroll right center transparent; */
     background: url("../images/arrow_drop_down.webp") no-repeat scroll right center transparent;
   }
+
+  .mb-5-custom {
+    margin-bottom: 60px !important;
+  }

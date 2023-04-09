@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="select-currency" class="form-control form-control-sm">Выберіть валюту:</label>
@@ -21,10 +22,31 @@
     </div>
   </div>
   <button id="convert-btn" type="submit" class="btn btn-primary form-control">Конвертувати</button>
-  <div class="md-6">
+  <div class="md-6 mb-5-custom">
     <label for="result-lbl" class="md-6">Результат конвертації:</label>
     <label id="result-lbl" class="md-6"></label>
   </div>
+
+  <!-- додаємо свій footer з реквізитами розробника -->
+  <footer class="bg-secondary fixed-bottom">
+    <div class="container py-1">
+      <div class="row justify-content-center">
+        <div class="col-7 text-start align-self-end">
+          <p class="m-0" style="font-size: 12px;">Designed by AleXKaN, ®2023</p>
+        </div>
+        <div class="col-2 text-end">
+          <a href="mailto:korshunov.olexiy@example.com" class="btn btn-secondary">
+            <img src="images/email-icon.png" alt="Email" class="me-1" title="Написати мені листа">
+          </a>
+        </div>
+        <div class="col-2 text-end">
+          <a href="https://github.com/korshunov-olexiy/" target="_blank" class="btn btn-secondary">
+            <img src="images/github-icon.png" alt="Github" class="me-1" title="Перейти на мій github">
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 <script src="js/popup.js"></script>
 </body>
