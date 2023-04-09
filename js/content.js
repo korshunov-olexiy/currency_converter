@@ -13,8 +13,8 @@ function StrToCurrency(t){
 document.addEventListener('mouseup', function(){
 var seltext = window.getSelection().toString();
 if (seltext.length <= 20){
-  chrome.storage.local.set({ selectedText: seltext });
   var paraAmountCode = StrToCurrency(seltext);
+  chrome.storage.local.set({ selectedText: paraAmountCode });
   if (paraAmountCode.amount && paraAmountCode.code && paraAmountCode.code != 'ГРН.'){
     chrome.storage.local.get(['currencies'], function(data) {
       const currencies = Object.values(data['currencies']);
