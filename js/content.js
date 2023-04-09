@@ -11,10 +11,11 @@ function StrToCurrency(t){
 
 // призначаємо подію на відпускання миші після виділення текста на сторінці
 document.addEventListener('mouseup', function(){
-var seltext = window.getSelection().toString();
-if (seltext.length <= 20){
+var seltext = window.getSelection();
+if ( seltext.toString().length <= 20 && seltext.rangeCount > 0){
+  var range = seltext.getRangeAt(0);
+  seltext = seltext.toString();
   var paraAmountCode = StrToCurrency(seltext);
-  var range = window.getSelection().getRangeAt(0);
   chrome.storage.local.set({ selectedText: paraAmountCode });
   if (paraAmountCode.amount && paraAmountCode.code && paraAmountCode.code != 'ГРН.'){
     chrome.storage.local.get(['currencies'], function(data) {

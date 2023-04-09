@@ -12,6 +12,21 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   })
 
+  function formatState (state) {
+    if (!state.id) { return state.text; }
+    var $state = $(
+      '<span><img src="' + $(state.element).attr('option-icon') + '" class="img-flag" /> ' + state.text + '</span>'
+      );
+    return $state;
+  };
+  
+  // создаем контрол "select2" плагина jquery select2.min.js выпадающего списка "select-currency"
+  $("#select-currency").select2({
+    dropdownParent: $(document.body),
+    // minimumResultsForSearch: -1,
+    templateResult: formatState
+  });
+
   $('#convert-btn').bind('click', function(){
     // let val = $('#select-currency option:selected').attr('value');
     // let txt = $('#select-currency option:selected').text();
