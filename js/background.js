@@ -37,7 +37,8 @@ function fetchCurrencies() {
         // об'єднуємо масив my_cc_codes та отриманий data по значенню 'cc'
         const currencies = Object.values(data.reduce((acc, cur) => {
             if (my_cc_codes[cur.cc]) {
-              cur.cc = [...new Set([...my_cc_codes[cur.cc], cur.cc])];
+                // додаємо код валюти з currencies та всі знайдені коди валют з my_cc_codes
+                cur.cc = [...new Set([cur.cc, ...my_cc_codes[cur.cc]])];
             } else {
                 cur.cc = [cur.cc];
             }
