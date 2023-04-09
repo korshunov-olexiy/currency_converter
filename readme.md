@@ -1,0 +1,2 @@
+"Currency converter" is an extension for the chrome browser, which converts the selected amount in any currency on any open page in the browser into an amount in hryvnias.
+In order for the extension to work correctly, it is desirable to highlight the amount with the currency code without unnecessary text. Also, if you open the extension window on the extension panel, the correct currency and amount will be set there if the text is correctly selected.
