@@ -14,20 +14,21 @@ document.addEventListener('mouseup', function(){
 var seltext = window.getSelection().toString();
 if (seltext.length <= 20){
   var paraAmountCode = StrToCurrency(seltext);
+  var range = window.getSelection().getRangeAt(0);
   chrome.storage.local.set({ selectedText: paraAmountCode });
   if (paraAmountCode.amount && paraAmountCode.code && paraAmountCode.code != 'ГРН.'){
     chrome.storage.local.get(['currencies'], function(data) {
       const currencies = Object.values(data['currencies']);
-      // Якщо в currenciesArr є currencyCode, повернемо атрибут rate, якщо ні, повернемо 0
+      /* Якщо в currencies є переданий код валюти (paraAmountCode.code)
+      повернемо атрибут rate, якщо ні, повернемо 0 */
       const rate = currencies.find(rate => rate.cc.includes(paraAmountCode.code))?.rate || 0;
       var convertedText = (paraAmountCode.amount * rate).toFixed(2) + ' грн.';
-      // Создаем элемент-контейнер, который будет заменять выделенный текст
+      // Створюємо елемент-контейнер, який буде змінить виділений текст
       var newElement = document.createElement("span");
-      newElement.style.color = "red"; // добавляем красный цвет тексту внутри span
-      newElement.style.backgroundColor = "yellow"; // добавляем желтый фон для span
+      newElement.style.color = "red"; // додаємо червоний колір тексту до span
+      newElement.style.backgroundColor = "yellow"; // додаємо жовтий колір до span
       newElement.appendChild( document.createTextNode(convertedText) );
-      // Заменяем выделенный текст на новый элемент с помощью Range и Selection API
-      var range = window.getSelection().getRangeAt(0);
+      // Змінюємо виділений текст на новий елемент за допомогою Range та Selection API
       range.deleteContents();
       range.insertNode(newElement);
     });
