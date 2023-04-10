@@ -5,9 +5,9 @@ const updatePeriodHours = 8;
 // (об'єднується з масивом `currencies`)
 const my_cc_codes = {
     USD: ['$', 'US$'], GBP: ['£'], PLN: ['ZŁ'], EUR: ['€'],
-    JPY: ['¥'], CHF: ['Fr.', 'Fr'], AUD: ['A$'], CAD: ['C$'],
+    JPY: ['¥'], CHF: ['Fr.', 'FR'], AUD: ['A$'], CAD: ['C$'],
     CNY: ['¥', '元'], HKD: ['HK$'], INR: ['₹'], SGD: ['S$'],
-    RUB: ['руб', '₽'], BYN: ['Br'], KZT: ['₸']
+    RUB: ['РУБ', 'РУБ.', '₽'], BYN: ['BR'], KZT: ['₸'], CZK: ['KČ']
 };
 
 chrome.runtime.onInstalled.addListener(function() {
