@@ -1,13 +1,15 @@
 // Намагаємось знайди в переданому тексті 't' суму та код валюти, інакше - NaN
 function StrToCurrency(t){
-  const match = t.match(/([\d.,\ ]+)\s*([^\d]{0,})/);
+  const regex = /([a-zA-ZŁł$€£¥₽₴₸₺₹.ңҢ]+|[\d\s\,]+)\s*([a-zA-ZŁł$€£¥₽₴₸₺₹.ңҢ]+|[\d\s\,]+)$/
+  const match = t.replace(/\n/g, '').replaceAll(',', '.').match(regex);
   var currencyArr = {};
   if (match) {
-      currencyArr.amount = parseFloat(match[1].replaceAll("", "").replaceAll(", ", ".").trim());
-      currencyArr.code = match[2].trim().toUpperCase();
+      currencyArr.amount = parseFloat(match[1].replaceAll(' ', '').trim());
+      currencyArr.code = match[2].toUpperCase().trim();
       return currencyArr;
   } else{ return NaN; };
 }
+
 
 // призначаємо подію на відпускання миші після виділення текста на сторінці
 document.addEventListener('mouseup', function(){
