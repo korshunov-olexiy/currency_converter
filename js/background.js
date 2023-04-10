@@ -5,7 +5,7 @@ const updatePeriodHours = 8;
 // (об'єднується з масивом `currencies`)
 const my_cc_codes = {
     USD: ['$', 'US$'], GBP: ['£'], PLN: ['ZŁ'], EUR: ['€'],
-    JPY: ['¥'], CHF: ['Fr.', 'FR'], AUD: ['A$'], CAD: ['C$'],
+    JPY: ['¥'], CHF: ['FR.', 'FR'], AUD: ['A$'], CAD: ['C$'],
     CNY: ['¥', '元'], HKD: ['HK$'], INR: ['₹'], SGD: ['S$'],
     RUB: ['РУБ', 'РУБ.', '₽'], BYN: ['BR'], KZT: ['₸'], CZK: ['KČ']
 };
