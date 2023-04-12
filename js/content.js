@@ -1,4 +1,4 @@
-// функция AmountCode возвращает ассоциативный массив, состоящий из суммы (amount) и кода валюты (code)
+// функція AmountCode повертає асоціативний масив, що складається з суми (amount) та кода валюти (code)
 function AmountCode(val1, val2) {
   const arr = {};
   if (val1.includes(",") && val1.includes('.')){
@@ -10,19 +10,16 @@ function AmountCode(val1, val2) {
   return arr;
 }
 
-function StrToCurrency (t) {
-  //regex для поиска суммы и кода валюты в строке
-  const r = /([\d.,]+)([^\d]{0,})|([^\d]{0,})([\d.,]+)/;
-  //предварительно убираем пробелы в строке и потом ищем соответствие выражению 'r'
-  const match = t.replaceAll(' ', '').match(r);
-  
-  // delete it
-  console.log(match);
-  
-  // если regex полностью не сработал или не найден код валюты вернуть NaN
+function StrToCurrency (currencyStr) {
+  //regex для пошуку суми та кода валюти в рядку
+  const pattern = /([\d.,]+)([^\d]{0,})|([^\d]{0,})([\d.,]+)/;
+  //предварительно убираем пробелы в строке и потом ищем соответствие выражению 'pattern'
+  const match = currencyStr.replaceAll(' ', '').match(pattern);
+
+  // Якщо regex повністю не спрацював або не знайдений код валюти - повернути NaN
   if (match === null || match [2] === '') { return NaN; }
-  /*если первая группа match = undefined, возвращаем 4ю и 3ю группы,
-  таким образом меняя местами найденную сумму и код валюты */
+  /* Якщо перша група match = undefined, повертаємо 4-у та 3-у групи,
+  таким чином міняємо місцями знайдену суму та код валюти */
   if (match[1] === undefined) { return AmountCode(match[4], match[3]); }
   else { return AmountCode(match[1], match[2]); }
 }
@@ -32,16 +29,6 @@ document.addEventListener('mouseup', function(){
 
   var seltext = window.getSelection();
   if ( seltext.toString().length <= 20){
-    // Разрешаем редактирование страницы
-    document.designMode = "on";
-    // Получаем диапазон выделения
-    var range = seltext.getRangeAt(0);
-    // Создаем фрагмент документа для изменения размера шрифта
-    var fontFragment = document.createElement('font');
-    fontFragment.setAttribute('size', '2');
-    // Оборачиваем выделенный диапазон в фрагмент документа
-    fontFragment.appendChild(range.extractContents());
-    range.insertNode(fontFragment);
     seltext = seltext.toString();
     var paraAmountCode = StrToCurrency(seltext);
     chrome.storage.local.set({ selectedText: paraAmountCode });
@@ -49,34 +36,10 @@ document.addEventListener('mouseup', function(){
       chrome.storage.local.get(['currencies'], function(data) {
         const currencies = Object.values(data['currencies']);
         /* Якщо в currencies є переданий код валюти (paraAmountCode.code)
-        повернемо атрибут rate, якщо ні, повернемо 0 */
+        повертаємо атрибут rate, якщо ні, повертаємо 0 */
         const rate = currencies.find(rate => rate.cc.includes(paraAmountCode.code))?.rate || 0;
         var convertedText = (paraAmountCode.amount * rate).toFixed(2) + ' грн.';
-
-        // Створюємо елемент-контейнер, який змінить виділений текст
-        // Создаем элемент span для выделенного текста и добавленного вами текста
-        var selectedSpan = document.createElement("span");
-        selectedSpan.style.color = "gray";
-        selectedSpan.style.backgroundColor = "yellow";
-        selectedSpan.textContent = seltext;
-
-        var mySpan = document.createElement("span");
-        mySpan.style.color = "blue";
-        mySpan.style.backgroundColor = "#FFFFE0";
-        mySpan.textContent = convertedText;
-
-        // Создаем пустой элемент span и добавляем его в элемент div
-        var spacerSpan = document.createElement("span");
-        spacerSpan.innerHTML = "<br>"; // добавляем перевод строки
-
-        // Создаем элемент div для обертывания элементов span
-        var wrapperDiv = document.createElement("div");
-        // Добавляем элементы span в элемент div
-        wrapperDiv.appendChild(selectedSpan).appendChild(spacerSpan).appendChild(mySpan);
-
-        // Устанавливаем HTML-содержимое для выделения
-        range.deleteContents();
-        range.insertNode(wrapperDiv);
+        alert(convertedText);
       });
     }
   }
