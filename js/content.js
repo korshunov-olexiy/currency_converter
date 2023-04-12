@@ -13,7 +13,7 @@ function AmountCode(val1, val2) {
 function StrToCurrency (currencyStr) {
   //regex для пошуку суми та кода валюти в рядку
   const pattern = /([\d.,]+)([^\d]{0,})|([^\d]{0,})([\d.,]+)/;
-  //предварительно убираем пробелы в строке и потом ищем соответствие выражению 'pattern'
+  // Перед пошуком відповідності патерну видаляємо пробіли
   const match = currencyStr.replaceAll(' ', '').match(pattern);
 
   // Якщо regex повністю не спрацював або не знайдений код валюти - повернути NaN
