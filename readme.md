@@ -1,2 +1,4 @@
-"Currency converter" is an extension for the chrome browser, which converts the selected amount in any currency on any open page in the browser into an amount in hryvnias.
-In order for the extension to work correctly, it is desirable to highlight the amount with the currency code without unnecessary text. Also, if you open the extension window on the extension panel, the correct currency and amount will be set there if the text is correctly selected.
+"Currency converter" призначений для легкого конвертування будь-якої суми в будь-якій відомій НБУ валюті на будь-якій сторінці.
+Це розширення для браузера chrome. Воно конвертує вибраний на сторінці поточної вкладки браузера текст в гривні, якщо, звісно, цей текст має суму та код будь-якої валюти, яка вказана в json-об'єкті НБУ (https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json).
+При інсталяції розширення в локальну змінну об'єкта storage додається отриманий з вищевказаного сайта json-об'єкт, та період оновлення цих даних, який дорівнює 8 годин.
+У розширення є свій інтерфейс, де можна ввести в поле вводу будь-яку суму, вибрати потрібну валюту і отримати сконвертований в гривнях результат.
