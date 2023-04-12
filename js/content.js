@@ -15,6 +15,10 @@ function StrToCurrency (t) {
   const r = /([\d.,]+)([^\d]{0,})|([^\d]{0,})([\d.,]+)/;
   //предварительно убираем пробелы в строке и потом ищем соответствие выражению 'r'
   const match = t.replaceAll(' ', '').match(r);
+  
+  // delete it
+  console.log(match);
+  
   // если regex полностью не сработал или не найден код валюты вернуть NaN
   if (match === null || match [2] === '') { return NaN; }
   /*если первая группа match = undefined, возвращаем 4ю и 3ю группы,
@@ -27,12 +31,20 @@ function StrToCurrency (t) {
 document.addEventListener('mouseup', function(){
 
   var seltext = window.getSelection();
-  if ( seltext.toString().length <= 20 && seltext.rangeCount > 0){
+  if ( seltext.toString().length <= 20){
+    // Разрешаем редактирование страницы
+    document.designMode = "on";
+    // Получаем диапазон выделения
     var range = seltext.getRangeAt(0);
+    // Создаем фрагмент документа для изменения размера шрифта
+    var fontFragment = document.createElement('font');
+    fontFragment.setAttribute('size', '2');
+    // Оборачиваем выделенный диапазон в фрагмент документа
+    fontFragment.appendChild(range.extractContents());
+    range.insertNode(fontFragment);
     seltext = seltext.toString();
     var paraAmountCode = StrToCurrency(seltext);
     chrome.storage.local.set({ selectedText: paraAmountCode });
-
     if (paraAmountCode.amount && paraAmountCode.code && paraAmountCode.code != 'ГРН.'){
       chrome.storage.local.get(['currencies'], function(data) {
         const currencies = Object.values(data['currencies']);
@@ -40,14 +52,31 @@ document.addEventListener('mouseup', function(){
         повернемо атрибут rate, якщо ні, повернемо 0 */
         const rate = currencies.find(rate => rate.cc.includes(paraAmountCode.code))?.rate || 0;
         var convertedText = (paraAmountCode.amount * rate).toFixed(2) + ' грн.';
+
         // Створюємо елемент-контейнер, який змінить виділений текст
-        var newElement = document.createElement("span");
-        newElement.style.color = "red"; // додаємо червоний колір тексту до span
-        newElement.style.backgroundColor = "yellow"; // додаємо жовтий колір до span
-        newElement.appendChild( document.createTextNode(convertedText) );
-        // Змінюємо виділений текст на новий елемент за допомогою Range та Selection API
+        // Создаем элемент span для выделенного текста и добавленного вами текста
+        var selectedSpan = document.createElement("span");
+        selectedSpan.style.color = "gray";
+        selectedSpan.style.backgroundColor = "yellow";
+        selectedSpan.textContent = seltext;
+
+        var mySpan = document.createElement("span");
+        mySpan.style.color = "blue";
+        mySpan.style.backgroundColor = "#FFFFE0";
+        mySpan.textContent = convertedText;
+
+        // Создаем пустой элемент span и добавляем его в элемент div
+        var spacerSpan = document.createElement("span");
+        spacerSpan.innerHTML = "<br>"; // добавляем перевод строки
+
+        // Создаем элемент div для обертывания элементов span
+        var wrapperDiv = document.createElement("div");
+        // Добавляем элементы span в элемент div
+        wrapperDiv.appendChild(selectedSpan).appendChild(spacerSpan).appendChild(mySpan);
+
+        // Устанавливаем HTML-содержимое для выделения
         range.deleteContents();
-        range.insertNode(newElement);
+        range.insertNode(wrapperDiv);
       });
     }
   }
