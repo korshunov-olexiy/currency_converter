@@ -27,9 +27,8 @@ function StrToCurrency (currencyStr) {
 // призначаємо подію на відпускання миші після виділення текста на сторінці
 document.addEventListener('mouseup', function(){
 
-  var seltext = window.getSelection();
-  if ( seltext.toString().length <= 20){
-    seltext = seltext.toString();
+  var seltext = window.getSelection().toString();
+  if ( seltext.length <= 20){
     var paraAmountCode = StrToCurrency(seltext);
     chrome.storage.local.set({ selectedText: paraAmountCode });
     if (paraAmountCode.amount && paraAmountCode.code && paraAmountCode.code != 'ГРН.'){
