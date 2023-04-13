@@ -6,7 +6,7 @@ This extension is available on a completely free basis. When the extension is in
 ## Installation
 To install the Currency Converter Chrome Extension, follow these steps:
 
-Download the extension from the Chrome Web Store or GitHub.
+Download the extension from GitHub.
 Click on the three dots in the upper-right corner of your Chrome browser.
 Select "More tools" from the drop-down menu.
 Click on "Extensions".
