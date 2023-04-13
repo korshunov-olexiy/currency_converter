@@ -6,7 +6,7 @@ function AmountCode(val1, val2) {
   } else if (val1.includes(',') && !val1.includes('.')) {
     arr.amount = val1.replace(',', '.');
   } else { arr.amount = val1; }
-    arr.code = val2.toUpperCase();
+    arr.code = val2.trim().toUpperCase();
   return arr;
 }
 
