@@ -11,6 +11,9 @@ const my_cc_codes = {
 };
 
 chrome.runtime.onInstalled.addListener(function() {
+    // встановлюємо змінну isEnabled за замовченням як 'true', що дозволяє роботу плагина
+    chrome.storage.local.set({'isEnabled': true});
+    // перевіряємо наявність 'currencies'. Якщо нема - виконуємо функцию getchCurrencies
     chrome.storage.local.get(['currencies'], function(data) {
         if (!data.currencies) {
             fetchCurrencies();
@@ -28,6 +31,7 @@ chrome.runtime.onInstalled.addListener(function() {
             })
         }
     });
+
 });
 
 // отримуємо дані про поточні курси валют, дату перевірки, та зберігаємо результат в локальні змінні chrome

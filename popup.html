@@ -9,6 +9,12 @@
 </head>
 <body>
 
+<!-- Додаємо "checkbox", через який можна увімкнути/вимкнути розширення -->
+<div class="form-check form-switch bg-warning mb-2">
+  <input class="form-check-input" type="checkbox" id="toggle-extension" checked="true">
+  <label class="form-check-label" for="toggle-extension">Вимкнути/увімкнути конвертацію</label>
+</div>
+
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="select-currency" class="form-control form-control-sm">Выберіть валюту:</label>
@@ -26,7 +32,6 @@
     <label for="result-lbl" class="md-6">Результат конвертації:</label>
     <label id="result-lbl" class="md-6"></label>
   </div>
-
   <!-- додаємо свій footer з реквізитами розробника -->
   <footer class="bg-secondary fixed-bottom">
     <div class="container py-1">

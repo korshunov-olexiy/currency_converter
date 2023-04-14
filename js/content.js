@@ -27,20 +27,25 @@ function StrToCurrency (currencyStr) {
 // призначаємо подію на відпускання миші після виділення текста на сторінці
 document.addEventListener('mouseup', function(){
 
-  var seltext = window.getSelection().toString();
-  if ( seltext.length <= 20){
-    var paraAmountCode = StrToCurrency(seltext);
-    chrome.storage.local.set({ selectedText: paraAmountCode });
-    if (paraAmountCode.amount && paraAmountCode.code && paraAmountCode.code != 'ГРН.'){
-      chrome.storage.local.get(['currencies'], function(data) {
-        const currencies = Object.values(data['currencies']);
-        /* Якщо в currencies є переданий код валюти (paraAmountCode.code)
-        повертаємо атрибут rate, якщо ні, повертаємо 0 */
-        const rate = currencies.find(rate => rate.cc.includes(paraAmountCode.code))?.rate || 0;
-        var convertedText = (paraAmountCode.amount * rate).toFixed(2) + ' грн.';
-        alert(convertedText);
-      });
+  chrome.storage.local.get('isEnabled', function(toggleCheckbox) {
+    // якщо дозволена робота плагина, продовжуємо
+    if (toggleCheckbox.isEnabled) {
+      var seltext = window.getSelection().toString();
+      if ( seltext.length <= 20){
+        var paraAmountCode = StrToCurrency(seltext);
+        chrome.storage.local.set({ selectedText: paraAmountCode });
+        if (paraAmountCode.amount && paraAmountCode.code && paraAmountCode.code != 'ГРН.'){
+          chrome.storage.local.get(['currencies'], function(data) {
+            const currencies = Object.values(data['currencies']);
+            /* Якщо в currencies є переданий код валюти (paraAmountCode.code)
+            повертаємо атрибут rate, якщо ні, повертаємо 0 */
+            const rate = currencies.find(rate => rate.cc.includes(paraAmountCode.code))?.rate || 0;
+            var convertedText = (paraAmountCode.amount * rate).toFixed(2) + ' грн.';
+            alert(convertedText);
+          });
+        }
+      }
     }
-  }
+  });
 
 });
