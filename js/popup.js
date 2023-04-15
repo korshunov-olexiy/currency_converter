@@ -2,20 +2,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // створюємо функціонал для підказки на елементі checkbox
   $("#toggle-extension").mousemove(function (eventObject) {
-    $data_tooltip = $(this).attr("data-tooltip");
-    $("#tooltip").text($data_tooltip)
-    .css({ 
-        "top" : eventObject.pageY + 5,
-      "left" : eventObject.pageX + 5
-    }).show();
-
+    $toggle_tooltip = $(this).attr("data-tooltip");
+    $("#tooltip_toggle").text($toggle_tooltip)
+    .css({ "top" : eventObject.pageY + 5, "left" : eventObject.pageX + 5 }).show();
   }).mouseout(function () {
-      $("#tooltip").hide()
-      .text("")
-      .css({
-          "top" : 0,
-          "left" : 0
-      });
+      $("#tooltip_toggle").hide().text("").css({ "top" : 0, "left" : 0 });
   });
 
   chrome.storage.local.get(['currencies'], data => {

@@ -40,8 +40,10 @@ document.addEventListener('mouseup', function(){
             /* Якщо в currencies є переданий код валюти (paraAmountCode.code)
             повертаємо атрибут rate, якщо ні, повертаємо 0 */
             const rate = currencies.find(rate => rate.cc.includes(paraAmountCode.code))?.rate || 0;
-            var convertedText = (paraAmountCode.amount * rate).toFixed(2) + ' грн.';
-            alert(convertedText);
+            if (rate != 0){
+              var convertedText = (paraAmountCode.amount * rate).toFixed(2) + ' грн.';
+              alert(convertedText);
+            }
           });
         }
       }
