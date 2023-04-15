@@ -33,14 +33,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // встановлюємо стан прапорця в залежності від змінної "isEnabled"
   chrome.storage.local.get('isEnabled', function(toggleCheckbox) {
-    $('toggle-extension').prop('checked', toggleCheckbox.isEnabled);
+    $('#toggle-extension').prop('checked', toggleCheckbox.isEnabled);
   });
 
   // Получаем элемент checkbox и добавляем обработчик события на его изменение
   $('#toggle-extension').on('change', function() {
     var isChecked = $(this).prop('checked');
     chrome.storage.local.set({'isEnabled': isChecked});
-    $(this).prop('checked', !isChecked);
   });
 
 });
