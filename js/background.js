@@ -11,9 +11,11 @@ const my_cc_codes = {
 };
 
 chrome.runtime.onInstalled.addListener(function() {
-    // встановлюємо змінну isEnabled за замовченням як 'true', що дозволяє роботу плагина
+    /* встановлюємо змінну isEnabled за замовченням як 'true',
+    що дозволяє роботу плагина */
     chrome.storage.local.set({'isEnabled': true});
-    // перевіряємо наявність 'currencies'. Якщо нема - виконуємо функцию getchCurrencies
+    /* перевіряємо наявність 'currencies'.
+    Якщо нема - виконуємо функцию fetchCurrencies */
     chrome.storage.local.get(['currencies'], function(data) {
         if (!data.currencies) {
             fetchCurrencies();
@@ -34,14 +36,16 @@ chrome.runtime.onInstalled.addListener(function() {
 
 });
 
-// отримуємо дані про поточні курси валют, дату перевірки, та зберігаємо результат в локальні змінні chrome
+/* отримуємо дані про поточні курси валют, дату перевірки,
+та зберігаємо результат в локальні змінні chrome */
 function fetchCurrencies() {
     const url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json';
     fetch(url).then(response => response.json()).then(data => {
         // об'єднуємо масив my_cc_codes та отриманий data по значенню 'cc'
         const currencies = Object.values(data.reduce((acc, cur) => {
             if (my_cc_codes[cur.cc]) {
-                // додаємо код валюти з currencies та всі знайдені коди валют з my_cc_codes
+                /* додаємо код валюти з currencies
+                та всі знайдені коди валют з my_cc_codes */
                 cur.cc = [...new Set([cur.cc, ...my_cc_codes[cur.cc]])];
             } else {
                 cur.cc = [cur.cc];
@@ -56,4 +60,5 @@ function fetchCurrencies() {
     });
 }
 
-setInterval(fetchCurrencies, 1000 * 60 * 60 * updatePeriodHours); // Встановлюємо оновлення даних кожні 8 годин
+// Встановлюємо оновлення даних кожні 8 годин
+setInterval(fetchCurrencies, 1000 * 60 * 60 * updatePeriodHours);

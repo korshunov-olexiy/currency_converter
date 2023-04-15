@@ -1,5 +1,23 @@
 document.addEventListener('DOMContentLoaded', function(){
 
+  // створюємо функціонал для підказки на елементі checkbox
+  $("#toggle-extension").mousemove(function (eventObject) {
+    $data_tooltip = $(this).attr("data-tooltip");
+    $("#tooltip").text($data_tooltip)
+    .css({ 
+        "top" : eventObject.pageY + 5,
+      "left" : eventObject.pageX + 5
+    }).show();
+
+  }).mouseout(function () {
+      $("#tooltip").hide()
+      .text("")
+      .css({
+          "top" : 0,
+          "left" : 0
+      });
+  });
+
   chrome.storage.local.get(['currencies'], data => {
     const currencies = Object.values(data['currencies']);
 
@@ -36,7 +54,8 @@ document.addEventListener('DOMContentLoaded', function(){
     $('#toggle-extension').prop('checked', toggleCheckbox.isEnabled);
   });
 
-  // Получаем элемент checkbox и добавляем обработчик события на его изменение
+  /* Отримуємо елемент checkbox,
+     та додаємо обробник подій на зміну його стану */
   $('#toggle-extension').on('change', function() {
     var isChecked = $(this).prop('checked');
     chrome.storage.local.set({'isEnabled': isChecked});

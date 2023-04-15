@@ -11,8 +11,10 @@
 
 <!-- Додаємо "checkbox", через який можна увімкнути/вимкнути розширення -->
 <div class="form-check form-switch bg-warning mb-2">
-  <input class="form-check-input" type="checkbox" id="toggle-extension"> <!--  checked="true" -->
+  <input class="form-check-input" type="checkbox" id="toggle-extension"
+         data-tooltip="Вимикає/вмикає конвертацію при виділенні тексту на сторінці">
   <label class="form-check-label" for="toggle-extension">Вимкнути/увімкнути конвертацію</label>
+  <div id="tooltip"></div>
 </div>
 
   <div class="form-row">
