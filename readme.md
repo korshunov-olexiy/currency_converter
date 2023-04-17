@@ -17,3 +17,5 @@ To use the Currency Converter Chrome Extension, follow these steps:
 Highlight the amount and currency code you want to convert on any webpage.
 The conversion will automatically take place.
 The converted result will appear in an alert window.
+
+[Sponsor this project](https://www.buymeacoffee.com/alexkan)
