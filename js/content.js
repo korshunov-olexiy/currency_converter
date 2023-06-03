@@ -14,7 +14,7 @@ function StrToCurrency (currencyStr) {
   //regex для пошуку суми та кода валюти в рядку
   const pattern = /([\d.,]+)([^\d]{0,})|([^\d]{0,})([\d.,]+)/;
   // Перед пошуком відповідності патерну видаляємо пробіли
-  const match = currencyStr.replaceAll(' ', '').match(pattern);
+  const match = currencyStr.replace(/\s+/, '').match(pattern);
 
   // Якщо regex повністю не спрацював або не знайдений код валюти - повернути NaN
   if (match === null || match [2] === '') { return NaN; }
